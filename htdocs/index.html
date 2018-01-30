@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br" data-ng-app="app">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.min.js"></script>
+    <title>Aula Angular</title>
+</head>
+
+<body>
+    <p>
+        Nome: <input type="text" data-ng-model="nome">
+        Pai: <input type="text" data-ng-model="pai">
+        Mãe: <input type="text" data-ng-model="mae">
+        <br>
+        <label for="nome">Meu nome é {{ nome }} sou filho de {{mae}} e {{pai}}</label>
+
+    </p>
+    <div></div>
+    <script>
+        angular.module("app", []);
+    </script>
+</body>
+
+</html>
