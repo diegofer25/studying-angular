@@ -11,17 +11,40 @@
 </head>
 
 <body>
-    <p>
-        Nome: <input type="text" data-ng-model="nome">
+    <p style="margin: 100px;  margin-left: 500px;">
+        Input: <input type="text" data-ng-model="var">
         <br>
-        <label for="nome">Meu nome é {{ nome | uppercase }}</label>
+        <label for="nome">Output: {{ var | reverse | limit:10:"teste"}}</label>
         <br>
-        <label for="nome">Meu nome é {{ nome | lowercase }}</label>
         
     </p>
     <div></div>
     <script>
-        angular.module("app", []);
+        angular.module("app", [])
+        .filter("reverse", ()=>{
+            return (text)=>{
+                if(text){
+
+                    return text.split("").reverse().join("");
+                }
+            }
+        }).filter("limit", ()=>{
+            return (text, len, final)=>{
+                if(text){
+                    if(isNaN(len)){
+                        len = 10;
+                    }
+                    if(final === undefined){
+                        final = "...";
+                    }
+                    if(text.len <= len){
+                        return text;
+                    }else{
+                        return text.substring(0, len-final.length) + final;
+                    }
+                }
+            }
+        });
     </script>
 </body>
 
