@@ -6,17 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.min.js"></script>
+    <script src="config/angular-locale_pt-br.js"></script>
     <title>Aula Angular</title>
 </head>
 
 <body>
     <p>
         Nome: <input type="text" data-ng-model="nome">
-        Pai: <input type="text" data-ng-model="pai">
-        Mãe: <input type="text" data-ng-model="mae">
         <br>
-        <label for="nome">Meu nome é {{ nome }} sou filho de {{mae}} e {{pai}}</label>
-
+        <label for="nome">Meu nome é {{ nome | uppercase }}</label>
+        <br>
+        <label for="nome">Meu nome é {{ nome | lowercase }}</label>
+        
     </p>
     <div></div>
     <script>
