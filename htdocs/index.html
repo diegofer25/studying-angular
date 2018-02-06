@@ -10,7 +10,8 @@
     <title>Aula Angular</title>
 </head>
 
-<body>
+<body data-ng-controller="ContactController">
+    {{ titulo }}
     <p style="margin: 100px;  margin-left: 500px;">
         Input:
         <input type="text" data-ng-model="var">
@@ -21,7 +22,7 @@
     </p>
     <script>
         angular.module("app", [])
-        .controller("ContactController", [$scope, ($scope)=>{
+        .controller("ContactController", ["$scope", ($scope)=>{
             $scope.titulo = "Schedule";
         }]);
     </script>
