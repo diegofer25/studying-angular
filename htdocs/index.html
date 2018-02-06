@@ -2,30 +2,84 @@
 <html lang="pt-br" data-ng-app="app">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.min.js"></script>
-    <script src="config/angular-locale_pt-br.js"></script>
-    <title>Aula Angular</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.min.js"></script>
+  <script src="config/angular-locale_pt-br.js"></script>
+  <title>Aula Angular</title>
 </head>
 
-<body data-ng-controller="ContactController">
-    {{ titulo }}
-    <p style="margin: 100px;  margin-left: 500px;">
-        Input:
-        <input type="text" data-ng-model="var">
-        <br>
-        <label for="nome">Output: {{ var }}</label>
-        <br>
+<body>
 
-    </p>
-    <script>
-        angular.module("app", [])
-        .controller("ContactController", ["$scope", ($scope)=>{
-            $scope.titulo = "Schedule";
-        }]);
-    </script>
+  <div data-ng-controller="ContactController">
+    <h1>{{ titulo }}</h1>
+    Nome:
+    <input type="text" data-ng-model="name">
+    <br> Telefone:
+    <input type="text" data-ng-model="tel">
+    <br>
+    <button onclick="">Cadastrar</button>
+
+
+
+    <ul>
+      <li data-ng-repeat="contato in contatos | orderBy:'nome'">
+        <h5>Nome: {{ contato.nome }}<br>
+        Telefone: {{ contato.telefone | phone}}</h5>
+      </li>
+    </ul>
+  </div>
+
+
+  <script>
+    angular.module("app", [])
+      .controller("ContactController", ContactController)
+      .filter("phone", () => {
+        return (text) => {
+          if (text) {
+            let ddd = "";
+            let part1 = "";
+            let part2 = "";
+            for (let i = 0; i < text.length; i++) {
+              if (i <= 1) {
+                ddd += text[i];
+              }
+              if (i >= 2 && i <= 6) {
+                part1 += text[i];
+              }
+              if (i > 6) {
+                part2 += text[i];
+              }
+            }
+            return `(${ddd}) ${part1}-${part2}`;
+          }
+        }
+      });
+
+    function ContactController($scope) {
+      $scope.titulo = "Cadastro de contato";
+      $scope.contatos =
+        [
+          {
+            nome: "Zulu",
+            telefone: "21990385650"
+          },
+          {
+            nome: "Gabriel",
+            telefone: "21990385650"
+          },
+          {
+            nome: "Diego",
+            telefone: "21935412588"
+          },
+          {
+            nome: "Walsh",
+            telefone: "21938565247 "
+          }
+        ];
+    }
+  </script>
 </body>
 
 </html>
