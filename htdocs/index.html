@@ -12,40 +12,44 @@
 
 <body>
     <p style="margin: 100px;  margin-left: 500px;">
-        Input: <input type="text" data-ng-model="var">
+        Input:
+        <input type="text" data-ng-model="var">
         <br>
-        <label for="nome">Output: {{ var | reverse | limit:10:"teste"}}</label>
+        <label for="nome">Output: {{ var }}</label>
         <br>
-        
+
     </p>
-    <div></div>
     <script>
         angular.module("app", [])
-        .filter("reverse", ()=>{
-            return (text)=>{
-                if(text){
-
-                    return text.split("").reverse().join("");
-                }
-            }
-        }).filter("limit", ()=>{
-            return (text, len, final)=>{
-                if(text){
-                    if(isNaN(len)){
-                        len = 10;
-                    }
-                    if(final === undefined){
-                        final = "...";
-                    }
-                    if(text.len <= len){
-                        return text;
-                    }else{
-                        return text.substring(0, len-final.length) + final;
-                    }
-                }
-            }
-        });
+        .controller("ContactController", [$scope, ($scope)=>{
+            $scope.titulo = "Schedule";
+        }]);
     </script>
 </body>
 
 </html>
+
+<!-- EXEMPLO DE FILTRO CUSTOMIZÁVEL
+    angular.module("app", [])
+        .filter("phone", () => {
+            return (text) => {
+                if (text) {
+                    let ddd = "";
+                    let part1 = "";
+                    let part2 = "-";
+                    for (let i = 0; i < text.length; i++) {
+                        if (i <= 1) {
+                            ddd += text[i];
+                        }
+                        if (i >= 2 && i <= 6) {
+                            part1 += text[i];
+                        }
+                        if (i > 6) {
+                            part2 += text[i];
+                        }
+                    }
+                    return `(${ddd}) ${part1}-${part2}`;
+                }
+            }
+        });
+-->
