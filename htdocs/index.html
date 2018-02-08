@@ -11,24 +11,21 @@
 </head>
 
 <body>
-
-  <div data-ng-controller="ContactController">
-    <h1>{{ titulo }}</h1>
-    Nome:
-    <input type="text" data-ng-model="name">
-    <br> Telefone:
-    <input type="text" data-ng-model="tel">
-    <br>
-    <button>Cadastrar</button>
-    
-    <ul>
-      <li data-ng-repeat="contato in contatos | orderBy:'nome'">
-        <h5>Nome: {{ contato.nome }}<br>
-        Telefone: {{ contato.telefone | phone}}</h5>
-      </li>
-    </ul>
+  <div data-ng-controller="ContactController as Contact">
+    <h1>{{ Contact.titulo }}</h1>
+    <table style="border: 1px solid">
+      <thead>
+        <th ng-repeat="(chave, valor) in Contact.contatos[0]">{{ chave }}</th>
+      </thead>
+      <tbody>
+        <tr ng-repeat="contato in Contact.contatos">
+          <td style="border: 1px solid" ng-repeat="dado in contato">
+            {{ dado }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-
 
   <script>
     angular.module("app", [])
@@ -55,9 +52,10 @@
         }
       });
 
-    function ContactController($scope) {
-      $scope.titulo = "Cadastro de contato";
-      $scope.contatos =
+    function ContactController() {
+      let vm = this;
+      vm.titulo = "Cadastro de contato";
+      vm.contatos =
         [
           {
             nome: "Zulu",
