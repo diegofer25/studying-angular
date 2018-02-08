@@ -18,7 +18,7 @@
         <th ng-repeat="(chave, valor) in Contact.contatos[0]">{{ chave }}</th>
       </thead>
       <tbody>
-        <tr ng-repeat="contato in Contact.contatos">
+        <tr ng-repeat="contato in Contact.contatos | orderBy:'nome'">
           <td style="border: 1px solid" ng-repeat="dado in contato">
             {{ dado }}
           </td>
@@ -75,6 +75,7 @@
           }
         ];
     }
+    
   </script>
 </body>
 
